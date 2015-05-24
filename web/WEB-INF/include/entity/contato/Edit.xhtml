@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ContatoEditDlg" widgetVar="ContatoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundle.EditContatoTitle}" closeOnEscape="true">
+
+            <h:form id="ContatoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{contatoController.selected != null}">
+
+
+                        <h:outputLabel value="#{bundle.EditContatoLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{contatoController.selected.id}" />
+                            <p:tooltip for="id" value="#{contatoController.getComponentMessages('id', bundle.EditContatoHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{bundle.EditContatoLabel_descricao}" for="descricao" />
+                        <h:panelGroup>
+                            <p:inputText id="descricao" value="#{contatoController.selected.descricao}" title="#{bundle.EditContatoTitle_descricao}" required="true" requiredMessage="#{bundle.EditContatoRequiredMessage_descricao}"/>
+                            <p:tooltip for="descricao" value="#{contatoController.getComponentMessages('descricao', bundle.EditContatoHelpText_descricao)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{bundle.EditContatoLabel_ramal}" for="ramal" />
+                        <h:panelGroup>
+                            <p:inputText id="ramal" value="#{contatoController.selected.ramal}" title="#{bundle.EditContatoTitle_ramal}" required="true" requiredMessage="#{bundle.EditContatoRequiredMessage_ramal}"/>
+                            <p:tooltip for="ramal" value="#{contatoController.getComponentMessages('ramal', bundle.EditContatoHelpText_ramal)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{bundle.EditContatoLabel_setor}" for="setor" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="setor" value="#{contatoController.selected.setor}"  converter="setorConverter">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{setorController.items}"
+                                               var="setorItem"
+                                               itemValue="#{setorItem}"
+                                               itemLabel="#{setorItem.id.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="setor" value="#{contatoController.getComponentMessages('setor', bundle.EditContatoHelpText_setor)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{contatoController.save}" value="#{bundle.Save}" update="display,:ContatoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ContatoEditDialog'));">
+                        <p:confirm header="#{bundle.ConfirmationHeader}" message="#{bundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ContatoEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="SetorEditPage" lazy="true">
+        <pm:header title="#{bundle.EditSetorTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{bundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:SetorListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="SetorEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{setorController.selected != null}">
+
+                        <pm:field>
+                            <p:outputLabel value="#{bundle.EditSetorLabel_nome}" for="nome" />
+                            <h:panelGroup>
+                                <p:inputText id="nome" value="#{setorController.selected.nome}" title="#{bundle.EditSetorTitle_nome}" required="true" requiredMessage="#{bundle.EditSetorRequiredMessage_nome}"/>
+                                <p:tooltip for="nome" value="#{setorController.getComponentMessages('nome', bundle.EditSetorHelpText_nome)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputLabel value="#{bundle.EditSetorLabel_id}" for="id" />
+                            <h:panelGroup>
+                                <h:outputText id="id" value="#{setorController.selected.id}" />
+                                <p:tooltip for="id" value="#{setorController.getComponentMessages('id', bundle.EditSetorHelpText_id)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{setorController.save}" value="#{bundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:SetorListPage:SetorListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:SetorListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

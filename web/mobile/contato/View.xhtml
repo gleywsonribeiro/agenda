@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ContatoViewPage" lazy="true">
+        <pm:header title="#{bundle.ViewContatoTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{bundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ContatoListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ContatoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{contatoController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{bundle.ViewContatoLabel_id}"/>
+                            <h:outputText value="#{contatoController.selected.id}" title="#{bundle.ViewContatoTitle_id}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{bundle.ViewContatoLabel_descricao}"/>
+                            <h:outputText value="#{contatoController.selected.descricao}" title="#{bundle.ViewContatoTitle_descricao}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{bundle.ViewContatoLabel_ramal}"/>
+                            <h:outputText value="#{contatoController.selected.ramal}" title="#{bundle.ViewContatoTitle_ramal}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{bundle.ViewContatoLabel_setor}"/>
+                            <h:outputText value="#{contatoController.selected.setor.id}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

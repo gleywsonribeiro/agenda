@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ContatoListForm">
+
+        <p:panel header="#{bundle.ListContatoTitle}">
+            <p:contextMenu id="ContatoDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{bundle.Create}" onclick="document.getElementById('ContatoListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{bundle.View}" onclick="document.getElementById('ContatoListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{bundle.Edit}" onclick="document.getElementById('ContatoListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{bundle.Delete}" onclick="document.getElementById('ContatoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{bundle.ContatoMenuItem_setor}" icon="ui-icon-search"  actionListener="#{contatoController.prepareSetor}" update=":SetorViewForm" oncomplete="PF('SetorViewDialog').show()" disabled="#{empty contatoController.selected.setor}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{contatoController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{contatoController.selected}">
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ContatoDataTableContextMenu" listener="#{contatoController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ContatoDataTableContextMenu" listener="#{contatoController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{contatoController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ContatoListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListContatoTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descricao}" filterBy="#{item.descricao}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListContatoTitle_descricao}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descricao}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.ramal}" filterBy="#{item.ramal}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListContatoTitle_ramal}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.ramal}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.setor.id}" filterBy="#{item.setor.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListContatoTitle_setor}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.setor.id}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{contatoController.prepareCreate}" update=":ContatoCreateForm" oncomplete="PF('ContatoCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{bundle.View}" update=":ContatoViewForm" oncomplete="PF('ContatoViewDialog').show()" disabled="#{empty contatoController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ContatoEditForm" oncomplete="PF('ContatoEditDialog').show()" disabled="#{empty contatoController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{contatoController.delete}" update=":growl,datalist" disabled="#{empty contatoController.selected}">
+                <p:confirm header="#{bundle.ConfirmationHeader}" message="#{bundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

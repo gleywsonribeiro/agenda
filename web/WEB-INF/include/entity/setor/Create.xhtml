@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SetorCreateDlg" widgetVar="SetorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSetorTitle}" closeOnEscape="true">
+
+            <h:form id="SetorCreateForm">
+
+                <h:panelGroup id="display" rendered="#{setorController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{bundle.CreateSetorLabel_nome}" for="nome" />
+                        <h:panelGroup>
+                            <p:inputText id="nome" value="#{setorController.selected.nome}" title="#{bundle.CreateSetorTitle_nome}" required="true" requiredMessage="#{bundle.CreateSetorRequiredMessage_nome}"/>
+                            <p:tooltip for="nome" value="#{setorController.getComponentMessages('nome', bundle.CreateSetorHelpText_nome)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{setorController.saveNew}" value="#{bundle.Save}" update="display,:SetorListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('SetorCreateDialog'));">
+                        <p:confirm header="#{bundle.ConfirmationHeader}" message="#{bundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SetorCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

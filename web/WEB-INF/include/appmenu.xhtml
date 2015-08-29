@@ -9,10 +9,10 @@
     <ui:composition>
         <h:form id="menuForm">
             <p:menubar>
-                <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                <p:menuitem value="#{bundle.Home}" outcome="/index" icon="home"/>
                 <p:submenu label="#{bundle.Maintenance}">
-                    <p:menuitem value="#{bundle.ContatoHeading}..." outcome="/contato/index" />
-                    <p:menuitem value="#{bundle.SetorHeading}..." outcome="/setor/index" />
+                    <p:menuitem value="#{bundle.ContatoHeading}..." outcome="/contato/index" icon="ui-icon-contact"/>
+                    <p:menuitem value="#{bundle.SetorHeading}..." outcome="/setor/index" icon="ui-icon-bookmark"/>
                 </p:submenu>
                 <p:menuitem value="#{bundle.Mobile}" outcome="/mobile/index" icon="ui-icon-signal"/>
             </p:menubar>

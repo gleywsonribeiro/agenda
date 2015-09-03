@@ -17,13 +17,13 @@
 
                         <p:outputLabel value="#{bundle.CreateContatoLabel_descricao}" for="descricao" />
                         <h:panelGroup>
-                            <p:inputText id="descricao" value="#{contatoController.selected.descricao}" title="#{bundle.CreateContatoTitle_descricao}" required="true" requiredMessage="#{bundle.CreateContatoRequiredMessage_descricao}"/>
+                            <p:inputText style="text-transform: uppercase" id="descricao" value="#{contatoController.selected.descricao}" title="#{bundle.CreateContatoTitle_descricao}" required="true" requiredMessage="#{bundle.CreateContatoRequiredMessage_descricao}"/>
                             <p:tooltip for="descricao" value="#{contatoController.getComponentMessages('descricao', bundle.CreateContatoHelpText_descricao)}"/>
                         </h:panelGroup>
 
                         <p:outputLabel value="#{bundle.CreateContatoLabel_ramal}" for="ramal" />
                         <h:panelGroup>
-                            <p:inputText id="ramal" value="#{contatoController.selected.ramal}" title="#{bundle.CreateContatoTitle_ramal}" required="true" requiredMessage="#{bundle.CreateContatoRequiredMessage_ramal}"/>
+                            <p:inputText style="text-transform: uppercase" id="ramal" value="#{contatoController.selected.ramal}" title="#{bundle.CreateContatoTitle_ramal}" required="true" requiredMessage="#{bundle.CreateContatoRequiredMessage_ramal}"/>
                             <p:tooltip for="ramal" value="#{contatoController.getComponentMessages('ramal', bundle.CreateContatoHelpText_ramal)}"/>
                         </h:panelGroup>
 

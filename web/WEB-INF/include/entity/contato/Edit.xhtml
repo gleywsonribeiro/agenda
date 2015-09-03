@@ -17,13 +17,13 @@
 
                         <h:outputLabel value="#{bundle.EditContatoLabel_id}" for="id" />
                         <h:panelGroup>
-                            <h:outputText id="id" value="#{contatoController.selected.id}" />
+                            <h:outputText style="text-transform: uppercase" id="id" value="#{contatoController.selected.id}" />
                             <p:tooltip for="id" value="#{contatoController.getComponentMessages('id', bundle.EditContatoHelpText_id)}"/>
                         </h:panelGroup>
 
                         <p:outputLabel value="#{bundle.EditContatoLabel_descricao}" for="descricao" />
                         <h:panelGroup>
-                            <p:inputText id="descricao" value="#{contatoController.selected.descricao}" title="#{bundle.EditContatoTitle_descricao}" required="true" requiredMessage="#{bundle.EditContatoRequiredMessage_descricao}"/>
+                            <p:inputText style="text-transform: uppercase" id="descricao" value="#{contatoController.selected.descricao}" title="#{bundle.EditContatoTitle_descricao}" required="true" requiredMessage="#{bundle.EditContatoRequiredMessage_descricao}"/>
                             <p:tooltip for="descricao" value="#{contatoController.getComponentMessages('descricao', bundle.EditContatoHelpText_descricao)}"/>
                         </h:panelGroup>
 

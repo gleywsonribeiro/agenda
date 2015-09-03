@@ -16,7 +16,7 @@
 
                         <p:outputLabel value="#{bundle.EditSetorLabel_nome}" for="nome" />
                         <h:panelGroup>
-                            <p:inputText id="nome" value="#{setorController.selected.nome}" title="#{bundle.EditSetorTitle_nome}" required="true" requiredMessage="#{bundle.EditSetorRequiredMessage_nome}"/>
+                            <p:inputText style="text-transform: uppercase" id="nome" value="#{setorController.selected.nome}" title="#{bundle.EditSetorTitle_nome}" required="true" requiredMessage="#{bundle.EditSetorRequiredMessage_nome}"/>
                             <p:tooltip for="nome" value="#{setorController.getComponentMessages('nome', bundle.EditSetorHelpText_nome)}"/>
                         </h:panelGroup>
 
